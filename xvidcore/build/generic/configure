@@ -4577,10 +4577,13 @@ $as_echo "$as_me: WARNING: nasm version is too old" >&2;}
 $as_echo_n "checking for asm object format... " >&6; }
        case "$target_os" in
            *bsd*|linux*|beos|irix*|solaris*)
+               target_ver="${target_os#*-}"
                if test "$ARCHITECTURE" = "X86_64" ; then
-                   { $as_echo "$as_me:${as_lineno-$LINENO}: result: elf64" >&5
-$as_echo "elf64" >&6; }
+                 if test "$target_ver" = "gnux32";then
+                   NASM_FORMAT="elfx32"
+                  else
                    NASM_FORMAT="elf64"
+                 fi
                else
                    { $as_echo "$as_me:${as_lineno-$LINENO}: result: elf" >&5
 $as_echo "elf" >&6; }

@@ -420,9 +420,13 @@ if test "$ARCHITECTURE" = "IA32" -o "$ARCHITECTURE" = "X86_64" ; then
        AC_MSG_CHECKING([for asm object format])
        case "$target_os" in
            *bsd*|linux*|beos|irix*|solaris*)
+               target_ver="${target_os#*-}"
                if test "$ARCHITECTURE" = "X86_64" ; then
-                   AC_MSG_RESULT([elf64])
+                 if test "$target_ver" = "gnux32";then
+                   NASM_FORMAT="elfx32"
+                  else
                    NASM_FORMAT="elf64"
+                 fi
                else
                    AC_MSG_RESULT([elf])
                    NASM_FORMAT="elf"
